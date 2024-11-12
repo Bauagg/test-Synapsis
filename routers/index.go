@@ -20,14 +20,14 @@ func IndexRouter(app *gin.Engine) {
 	router.DELETE("/api/category/:id", controller.DeleteCategory)
 
 	// book
-	router.GET("/api/book", controller.ListBook)
-	router.POST("/api/book", middleware.AuthMiddleware(), controller.CreateBook)
-	router.PUT("/api/book/:id", middleware.AuthMiddleware(), controller.UpdateBook)
-	router.DELETE("/api/book/:id", middleware.AuthMiddleware(), controller.DeleteBook)
+	router.GET("/api/books", controller.ListBook)
+	router.POST("/api/books", middleware.AuthMiddleware(), controller.CreateBook)
+	router.PUT("/api/books/:id", middleware.AuthMiddleware(), controller.UpdateBook)
+	router.DELETE("/api/books/:id", middleware.AuthMiddleware(), controller.DeleteBook)
 
 	// rental book
-	router.GET("/api/rental", middleware.AuthMiddleware(), controller.ListRentalBook)
-	router.POST("/api/rental", middleware.AuthMiddleware(), controller.CreateRentalBook)
-	router.PUT("/api/rental/:id", middleware.AuthMiddleware(), controller.UpdateRentalBook)
-	router.DELETE("/api/rental/:id", middleware.AuthMiddleware(), controller.DeleteRental)
+	router.GET("/api/rentals", middleware.AuthMiddleware(), controller.ListRentalBook)
+	router.POST("/api/rentals", middleware.AuthMiddleware(), controller.CreateRentalBook)
+	router.PUT("/api/rentals/:id", middleware.AuthMiddleware(), controller.UpdateRentalBook)
+	router.DELETE("/api/rentals/:id", middleware.AuthMiddleware(), controller.DeleteRental)
 }
