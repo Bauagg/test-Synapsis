@@ -7,7 +7,10 @@ import (
 	"books/migrations"
 	"books/routers"
 	"log"
+	"net/http"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,7 +24,28 @@ func main() {
 
 	app := gin.Default()
 
+	// CORS middleware
+	app.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowMethods: []string{
+			http.MethodGet,
+			http.MethodPost,
+			http.MethodPut,
+			http.MethodDelete,
+			http.MethodOptions,
+			http.MethodPatch,
+			http.MethodHead,
+			http.MethodConnect,
+			http.MethodTrace,
+		},
+		AllowHeaders:  []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders: []string{"Content-Length"},
+		MaxAge:        12 * time.Hour,
+	}))
+
 	// APP middleware
+	app.Use(gin.Logger())
+	app.Use(gin.Recovery())
 	app.Use(middleware.ErrorMiddleware())
 
 	// Setup static file serving for images
